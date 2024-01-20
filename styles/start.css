@@ -30,8 +30,12 @@ h1 {
     text-decoration: none;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 .leaderboard {
-    background-color: white;
+    background-color: lightblue;
     width: 300px;
     height: 300px;
     position: absolute;
@@ -41,14 +45,16 @@ h1 {
 }
 
 .leaderboard__header {
+    border: 2px solid lightblue;
     height: 50px;
     /* border: solid red 2px; */
     text-align: center;
-    font-size: 38px;
     padding-top: 5px;
-    border-bottom: 1px solid lightblue;
+    font-size: 38px;
+    /* border-bottom: 1px solid black; */
+    color: white;
 }
 
-ul {
-    list-style: none;
+th {
+    border-bottom: solid 1px black;
 }
