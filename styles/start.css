@@ -29,3 +29,26 @@ h1 {
     color: black;
     text-decoration: none;
 }
+
+.leaderboard {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.leaderboard__header {
+    height: 50px;
+    /* border: solid red 2px; */
+    text-align: center;
+    font-size: 38px;
+    padding-top: 5px;
+    border-bottom: 1px solid lightblue;
+}
+
+ul {
+    list-style: none;
+}
