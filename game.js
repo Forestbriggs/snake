@@ -1,6 +1,17 @@
-//TODO implement game over page and local storage
+//!!!!!!!!
+//TODO MOST IMPORTANT
+//TODO REFACTOR CODE ITS UGLY
+//!!!!!!!!
+
+
+//TODO Possibly make dynamic?? Remove Start Button on click, add Game Over text
+//TODO * and restart button on game end??
+//TODO for start game remove start button and call main, for game over add restart button
+//TODO * that calls main
+
+//TODO implement game over page and local storage for leaderboard
 //TODO implement game modes easy, medium, hard, and dynamic
-//TODO maybe implement countdown
+//TODO maybe implement countdown at start
 
 let GAME_SPEED = 100;
 const CANVAS_BORDER_COLOR = 'black';
