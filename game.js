@@ -1,4 +1,8 @@
-const GAME_SPEED = 100;
+//TODO implement game over page and local storage
+//TODO implement game modes easy, medium, hard, and dynamic
+//TODO maybe implement countdown
+
+let GAME_SPEED = 100;
 const CANVAS_BORDER_COLOR = 'black';
 const CANVAS_BACKGROUND_COLOR = 'white';
 const SNAKE_COLOR = 'lightgreen';
@@ -32,7 +36,10 @@ const ctx = gameCanvas.getContext("2d");
 */
 function main() {
 
-    if (didGameEnd()) return;
+    if (didGameEnd()) {
+        window.location.replace("./index.html");
+        return;
+    }
 
     setTimeout(function onTick() {
         changingDirection = false;
@@ -127,6 +134,10 @@ function advanceSnake() {
     if (didEatFood) {
         //* update score when food is eaten
         score += 10;
+        //? For dynamic game mode
+        // if (score === 30) {
+        //     GAME_SPEED = 50;
+        // }
         //* change score value in html doc
         document.getElementById('score').innerHTML = score;
         //* create new food instance
@@ -168,7 +179,6 @@ function changeDirection(event) {
         dy = 10;
     }
 }
-
 
 //* start game
 main();
