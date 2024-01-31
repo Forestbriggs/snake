@@ -27,8 +27,8 @@ const ctx = gameCanvas.getContext("2d");
 
 
 /*
- * Main function of the game
- * called repeatedly to advance game
+* Main function of the game
+* called repeatedly to advance game
 */
 function main() {
 
