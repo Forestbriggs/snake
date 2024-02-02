@@ -1,8 +1,3 @@
-//!!!!!!!!
-//TODO MOST IMPORTANT
-//TODO REFACTOR CODE ITS UGLY
-//!!!!!!!!
-
 
 //TODO Possibly make dynamic?? Remove Start Button on click, add Game Over text
 //TODO * and restart button on game end??
@@ -11,13 +6,15 @@
 
 //TODO implement game over page and local storage for leaderboard
 //TODO implement game modes easy, medium, hard, and dynamic
-//TODO maybe implement countdown at start
 
 let GAME_SPEED = 100;
+
 const CANVAS_BORDER_COLOR = 'black';
 const CANVAS_BACKGROUND_COLOR = 'white';
+
 const SNAKE_COLOR = 'lightgreen';
 const SNAKE_BORDER_COLOR = 'darkgreen';
+
 const FOOD_COLOR = 'red';
 const FOOD_BORDER_COLOR = 'darkred';
 
@@ -66,6 +63,8 @@ function main() {
 }
 
 
+//* FUNCTIONALITY *//
+
 //* check if game ended
 function didGameEnd() {
     //* start at 4 because impossible for first three parts to
@@ -83,6 +82,41 @@ function didGameEnd() {
     return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
 }
 
+function changeDirection(event) {
+    const LEFT_KEY = 37;
+    const RIGHT_KEY = 39;
+    const UP_KEY = 38;
+    const DOWN_KEY = 40;
+
+    if (changingDirection) return;
+    changingDirection = true;
+
+    const keyPressed = event.keyCode;
+    const goingUp = dy === -10;
+    const goingDown = dy === 10;
+    const goingRight = dx === 10;
+    const goingLeft = dx === -10;
+
+    if (keyPressed === LEFT_KEY && !goingRight) {
+        dx = -10;
+        dy = 0;
+    }
+    if (keyPressed === UP_KEY && !goingDown) {
+        dx = 0;
+        dy = -10;
+    }
+    if (keyPressed === RIGHT_KEY && !goingLeft) {
+        dx = 10;
+        dy = 0;
+    }
+    if (keyPressed === DOWN_KEY && !goingUp) {
+        dx = 0;
+        dy = 10;
+    }
+}
+
+//* GAME CANVAS *//
+
 /*
 * Change the bg color of the canvas and draw
 * a border around it
@@ -97,6 +131,8 @@ function clearCanvas() {
     //* Draw a "border" around the entire canvas
     ctx.strokeRect(0, 0, gameCanvas.clientWidth, gameCanvas.height);
 }
+
+//* FOOD *//
 
 function randomTen(min, max) {
     return Math.round((Math.random() * (max - min) + min) / 10) * 10;
@@ -121,6 +157,8 @@ function drawFood() {
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
 }
+
+//* SNAKE *//
 
 let snake = [{ x: 150, y: 150 }, { x: 140, y: 150 }, { x: 130, y: 150 }, { x: 120, y: 150 }, { x: 110, y: 150 },];
 
@@ -160,40 +198,10 @@ function advanceSnake() {
         snake.pop();
     }
 }
-function changeDirection(event) {
-    const LEFT_KEY = 37;
-    const RIGHT_KEY = 39;
-    const UP_KEY = 38;
-    const DOWN_KEY = 40;
 
-    if (changingDirection) return;
-    changingDirection = true;
 
-    const keyPressed = event.keyCode;
-    const goingUp = dy === -10;
-    const goingDown = dy === 10;
-    const goingRight = dx === 10;
-    const goingLeft = dx === -10;
+//* START GAME *//
 
-    if (keyPressed === LEFT_KEY && !goingRight) {
-        dx = -10;
-        dy = 0;
-    }
-    if (keyPressed === UP_KEY && !goingDown) {
-        dx = 0;
-        dy = -10;
-    }
-    if (keyPressed === RIGHT_KEY && !goingLeft) {
-        dx = 10;
-        dy = 0;
-    }
-    if (keyPressed === DOWN_KEY && !goingUp) {
-        dx = 0;
-        dy = 10;
-    }
-}
-
-//* start game
 main();
 
 //* Create first food instance

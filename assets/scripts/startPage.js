@@ -51,6 +51,3 @@ function drawSnake() {
 clearCanvas();
 drawSnake();
 drawFood();
-
-// const startButton = document.getElementById("startButton");
-// startButton.addEventListener("click", location.href("../views/snake.html"))
