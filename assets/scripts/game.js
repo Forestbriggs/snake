@@ -27,6 +27,7 @@ let score = 0;
 //* checking if direction is currently changing
 let changingDirection;
 
+//* food's coordinates
 let foodX;
 let foodY;
 
@@ -37,6 +38,7 @@ let dy = 0;
 
 //* Get canvas element
 const gameCanvas = document.getElementById("gameCanvas");
+
 //* Return a 2-dimensional drawing context
 const ctx = gameCanvas.getContext("2d");
 
@@ -48,7 +50,7 @@ const ctx = gameCanvas.getContext("2d");
 function main() {
 
     if (didGameEnd()) {
-        window.location.replace("./index.html");
+        window.location.replace("../../index.html");
         return;
     }
 
