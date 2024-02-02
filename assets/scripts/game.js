@@ -47,7 +47,11 @@ const ctx = gameCanvas.getContext("2d");
 function main() {
 
     if (didGameEnd()) {
-        window.location.replace("../../index.html");
+        const scoreContainer = document.querySelector("#score-container");
+        scoreContainer.innerHTML += "<div id='game-over'>GAME OVER</div>"
+
+        const buttonContainer = document.querySelector("#button-container");
+        buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
         return;
     }
 
