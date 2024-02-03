@@ -4,7 +4,6 @@
 //TODO for start game remove start button and call main, for game over add restart button
 //TODO * that calls main
 
-//TODO implement game over page and local storage for leaderboard
 //TODO implement game modes easy, medium, hard, and dynamic
 
 let GAME_SPEED = 100;
@@ -50,13 +49,12 @@ function main() {
         const scoreContainer = document.querySelector("#score-container");
         scoreContainer.innerHTML += "<div id='game-over'>GAME OVER</div>"
 
-        const buttonContainer = document.querySelector("#button-container");
-        buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
-
-        handleScores();
-        // const firstPlace = document.querySelector("#first");
-        // const firstPlaceName = firstPlace.children[1];
-        // firstPlaceName.innerText = JSON.parse(localStorage.getItem("names"))[0];
+        if (score > JSON.parse(localStorage.getItem("forests-snake-scores"))[4]) {
+            getName();
+        } else {
+            const buttonContainer = document.querySelector("#button-container")
+            buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
+        }
         return;
     }
 
@@ -210,15 +208,49 @@ function advanceSnake() {
 
 //* LOCAL STORAGE *//
 
-function handleScores() {
+function getName() {
+    const nameField = document.createElement("input");
+    nameField.setAttribute("placeholder", "Name");
+    nameField.setAttribute("id", "name-field");
+
+    const submitNameButton = document.createElement("button");
+    submitNameButton.setAttribute("id", "submit-name");
+    submitNameButton.innerText = "Submit"
+
+    const buttonContainer = document.querySelector("#button-container");
+    buttonContainer.append(nameField, submitNameButton);
+
+    submitNameButton.addEventListener("click", () => {
+        if (nameField.value) {
+            handleScores(nameField.value);
+        }
+        buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
+    })
+
+    document.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13 && nameField.value) {
+            if (nameField.value) {
+                handleScores(nameField.value);
+            }
+            buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
+        }
+    })
+}
+
+function handleScores(name) {
     const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
+    const names = JSON.parse(localStorage.getItem("forests-snake-names"));
 
     for (let i = 0; i < scores.length; i++) {
         if (score > scores[i]) {
             scores.splice(i, 0, score);
+            names.splice(i, 0, name);
             scores.pop();
+            names.pop()
             localStorage.setItem("forests-snake-scores", JSON.stringify(scores));
+            localStorage.setItem("forests-snake-names", JSON.stringify(names));
             setScores();
+            setNames();
             return;
         }
     }
