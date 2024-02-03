@@ -47,3 +47,33 @@ body {
     color: black;
     text-decoration: none;
 }
+
+
+table {
+    border-collapse: collapse;
+}
+
+.leaderboard {
+    background-color: lightblue;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.leaderboard__header {
+    border: 2px solid lightblue;
+    height: 50px;
+    /* border: solid red 2px; */
+    text-align: center;
+    padding-top: 5px;
+    font-size: 38px;
+    /* border-bottom: 1px solid black; */
+    color: white;
+}
+
+th {
+    border-bottom: solid 1px black;
+}

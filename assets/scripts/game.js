@@ -52,6 +52,11 @@ function main() {
 
         const buttonContainer = document.querySelector("#button-container");
         buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
+
+        // handlesScores();
+        // const firstPlace = document.querySelector("#first");
+        // const firstPlaceName = firstPlace.children[1];
+        // firstPlaceName.innerText = JSON.parse(localStorage.getItem("names"))[0];
         return;
     }
 
@@ -203,9 +208,38 @@ function advanceSnake() {
     }
 }
 
+//* LOCAL STORAGE *//
+
+// handlesScores() {
+//     const scores = localStorage.getItem("scores") {
+
+//     }
+// }
+
 
 //* START GAME *//
 
+if (localStorage.getItem("forests-snake-scores")) {
+    const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
+    document.querySelector("#first").children[2].innerText = scores[0];
+    document.querySelector("#second").children[2].innerText = scores[1];
+    document.querySelector("#third").children[2].innerText = scores[2];
+    document.querySelector("#fourth").children[2].innerText = scores[3];
+    document.querySelector("#fifth").children[2].innerText = scores[4];
+} else {
+    localStorage.setItem("forests-snake-scores", JSON.stringify([0, 0, 0, 0, 0]))
+}
+
+if (localStorage.getItem("forests-snake-names")) {
+    const names = JSON.parse(localStorage.getItem("forests-snake-names"));
+    document.querySelector("#first").children[1].innerText = names[0];
+    document.querySelector("#second").children[1].innerText = names[1];
+    document.querySelector("#third").children[1].innerText = names[2];
+    document.querySelector("#fourth").children[1].innerText = names[3];
+    document.querySelector("#fifth").children[1].innerText = names[4];
+} else {
+    localStorage.setItem("forests-snake-names", JSON.stringify(["PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE"]))
+}
 main();
 
 //* Create first food instance
@@ -213,3 +247,5 @@ createFood();
 
 //* call changeDirection whenever a key is pressed
 document.addEventListener("keydown", changeDirection);
+
+// localStorage.setItem("names", JSON.stringify(["", "", "", "", ""]))
