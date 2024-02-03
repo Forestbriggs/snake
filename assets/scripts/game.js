@@ -53,7 +53,7 @@ function main() {
         const buttonContainer = document.querySelector("#button-container");
         buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
 
-        // handlesScores();
+        handleScores();
         // const firstPlace = document.querySelector("#first");
         // const firstPlaceName = firstPlace.children[1];
         // firstPlaceName.innerText = JSON.parse(localStorage.getItem("names"))[0];
@@ -210,35 +210,50 @@ function advanceSnake() {
 
 //* LOCAL STORAGE *//
 
-// handlesScores() {
-//     const scores = localStorage.getItem("scores") {
+function handleScores() {
+    const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
 
-//     }
-// }
+    for (let i = 0; i < scores.length; i++) {
+        if (score > scores[i]) {
+            scores.splice(i, 0, score);
+            scores.pop();
+            localStorage.setItem("forests-snake-scores", JSON.stringify(scores));
+            setScores();
+            return;
+        }
+    }
+}
 
+function setScores() {
+    const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
+    const leaderboard = document.querySelector("#leaderboard-body");
+    for (let i = 0; i < scores.length; i++) {
+        leaderboard.children[i].children[2].innerText = scores[i]
+    }
+}
+
+function setNames() {
+    const names = JSON.parse(localStorage.getItem("forests-snake-names"));
+    const leaderboard = document.querySelector("#leaderboard-body");
+    for (let i = 0; i < names.length; i++) {
+        leaderboard.children[i].children[1].innerText = names[i];
+    }
+}
 
 //* START GAME *//
 
 if (localStorage.getItem("forests-snake-scores")) {
-    const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
-    document.querySelector("#first").children[2].innerText = scores[0];
-    document.querySelector("#second").children[2].innerText = scores[1];
-    document.querySelector("#third").children[2].innerText = scores[2];
-    document.querySelector("#fourth").children[2].innerText = scores[3];
-    document.querySelector("#fifth").children[2].innerText = scores[4];
+    setScores();
 } else {
     localStorage.setItem("forests-snake-scores", JSON.stringify([0, 0, 0, 0, 0]))
+    setScores();
 }
 
 if (localStorage.getItem("forests-snake-names")) {
-    const names = JSON.parse(localStorage.getItem("forests-snake-names"));
-    document.querySelector("#first").children[1].innerText = names[0];
-    document.querySelector("#second").children[1].innerText = names[1];
-    document.querySelector("#third").children[1].innerText = names[2];
-    document.querySelector("#fourth").children[1].innerText = names[3];
-    document.querySelector("#fifth").children[1].innerText = names[4];
+    setNames()
 } else {
-    localStorage.setItem("forests-snake-names", JSON.stringify(["PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE"]))
+    localStorage.setItem("forests-snake-names", JSON.stringify(["PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE"]));
+    setNames();
 }
 main();
 
