@@ -47,6 +47,35 @@ function drawSnake() {
     snake.forEach(drawSnakePart);
 }
 
+function setScores() {
+    const scores = JSON.parse(localStorage.getItem("forests-snake-scores"));
+    const leaderboard = document.querySelector("#leaderboard-body");
+    for (let i = 0; i < scores.length; i++) {
+        leaderboard.children[i].children[2].innerText = scores[i]
+    }
+}
+
+function setNames() {
+    const names = JSON.parse(localStorage.getItem("forests-snake-names"));
+    const leaderboard = document.querySelector("#leaderboard-body");
+    for (let i = 0; i < names.length; i++) {
+        leaderboard.children[i].children[1].innerText = names[i];
+    }
+}
+
+if (localStorage.getItem("forests-snake-scores")) {
+    setScores();
+} else {
+    localStorage.setItem("forests-snake-scores", JSON.stringify([0, 0, 0, 0, 0]))
+    setScores();
+}
+
+if (localStorage.getItem("forests-snake-names")) {
+    setNames()
+} else {
+    localStorage.setItem("forests-snake-names", JSON.stringify(["PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE", "PLAY MORE"]));
+    setNames();
+}
 
 clearCanvas();
 drawSnake();
