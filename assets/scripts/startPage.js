@@ -89,10 +89,9 @@ if (document.cookie.match("current-player-name")) {
 }
 
 startButton.addEventListener("click", getName);
-document.addEventListener("keydown", (e) => {
-    console.log(e.keyCode);
-    if (e.keyCode === 13) {
-        getName();
+startButton.addEventListener("keydown", (e) => {
+    if (e.keyCode === "13") {
+        getName()
     }
 })
 
