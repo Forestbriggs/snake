@@ -80,3 +80,25 @@ if (localStorage.getItem("forests-snake-names")) {
 clearCanvas();
 drawSnake();
 drawFood();
+
+const nameInput = document.querySelector("#name-input");
+const startButton = document.querySelector("#start-button");
+
+if (document.cookie.match("current-player-name")) {
+    nameInput.value = document.cookie.match("current-player-name").input.split("=")[1];
+}
+
+startButton.addEventListener("click", getName);
+document.addEventListener("keydown", (e) => {
+    console.log(e.keyCode);
+    if (e.keyCode === 13) {
+        getName();
+    }
+})
+
+function getName() {
+    if (nameInput.value) {
+        document.cookie = `current-player-name=${nameInput.value}`;
+        location.replace("../../views/snake.html")
+    }
+}

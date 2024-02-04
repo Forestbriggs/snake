@@ -37,6 +37,7 @@ body {
 
 #homeButton,
 #restart {
+    cursor: pointer;
     width: 80px;
     padding: 8px 10px;
     border-radius: .5rem;

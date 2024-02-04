@@ -51,10 +51,16 @@ function main() {
 
         if (score > JSON.parse(localStorage.getItem("forests-snake-scores"))[4]) {
             getName();
-        } else {
-            const buttonContainer = document.querySelector("#button-container")
-            buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
         }
+
+        const buttonContainer = document.querySelector("#button-container")
+        buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
+        const restartButton = document.querySelector("#restart a");
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode === 13) {
+                restartButton.click();
+            }
+        })
         return;
     }
 
@@ -209,32 +215,13 @@ function advanceSnake() {
 //* LOCAL STORAGE *//
 
 function getName() {
-    const nameField = document.createElement("input");
-    nameField.setAttribute("placeholder", "Name");
-    nameField.setAttribute("id", "name-field");
-
-    const submitNameButton = document.createElement("button");
-    submitNameButton.setAttribute("id", "submit-name");
-    submitNameButton.innerText = "Submit"
+    const name = document.cookie.match("current-player-name").input.split("=")[1];
 
     const buttonContainer = document.querySelector("#button-container");
-    buttonContainer.append(nameField, submitNameButton);
 
-    submitNameButton.addEventListener("click", () => {
-        if (nameField.value) {
-            handleScores(nameField.value);
-        }
-        buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
-    })
+    handleScores(name);
+    buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
 
-    document.addEventListener("keydown", (e) => {
-        if (e.keyCode === 13 && nameField.value) {
-            if (nameField.value) {
-                handleScores(nameField.value);
-            }
-            buttonContainer.innerHTML = '<button id="homeButton"><a href="../index.html">Home</a></button><button id="restart"><a href="./snake.html">Restart</a></button>'
-        }
-    })
 }
 
 function handleScores(name) {
@@ -294,5 +281,3 @@ createFood();
 
 //* call changeDirection whenever a key is pressed
 document.addEventListener("keydown", changeDirection);
-
-// localStorage.setItem("names", JSON.stringify(["", "", "", "", ""]))
